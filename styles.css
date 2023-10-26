@@ -22,12 +22,13 @@ main {
 }
 
 label {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     padding: 1rem;
     color: whitesmoke;
 }
 label span {
     padding: 0 2px;
+    color: rgba(256,256,256,0.5);
 }
 label span:hover {
     cursor: pointer;
@@ -39,10 +40,13 @@ label span:hover {
     width: 55%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
+.inputs-top {
+    flex-wrap: wrap;
+}
+
 h1 {
     /* color: var(--base); */
     color: var(--turquoise-color);
@@ -66,7 +70,7 @@ img {
     transition: .3s;
 }
 
-#new-var-form input {
+.submit {
     color: black;
 }
 

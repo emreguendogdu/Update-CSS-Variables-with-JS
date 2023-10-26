@@ -63,6 +63,7 @@ img {
     height: 50%;
     transform: scale(var(--zoom));
     filter: blur(var(--blur)) hue-rotate(var(--color-deg));
+    transition: .3s;
 }
 
 #new-var-form input {

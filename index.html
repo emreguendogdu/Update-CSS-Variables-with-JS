@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update CSS Variables with JS</title>
+    <link rel="stylesheet" href="./styles.css">
+    
+    
+</head>
+<body>
+    <main>
+        <h1>Update CSS Variables with <span class="hl">JS</span></h1>
+        <div class="inputs-wrapper inputs-top">
+            <label for="blur">Blur:</label>
+            <input type="range" id="blur" name="blur" min="0" max="10" value="0" data-type="px">
+            <label for="zoom">Zoom:</label>
+            <input type="range" id="zoom" name="zoom" min="1" max="25" value="1">
+            <label for="color-deg">Color:</label>
+            <input type="range" id="color-deg" name="color-deg" min="1" max="359" value="0" data-type="deg">
+        </div>
+        <div class="img-wrapper">
+            <img src="./mandelbrot.jpg" alt="Mandelbrot fractal">
+        </div>
+        <div class="inputs-wrapper inputs-bottom">
+            <form id="new-var-form">
+                <label for="new-style">New style:</label>
+                <input type="text" name="new-var" id="new-style" placeholder="margin..." required>
+                <label for="new-style-suffix">New suffix:</label>
+                <input type="text" name="new-var" id="new-style-suffix" placeholder="px...">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <a href="https://github.com/emreguendogdu" class="marka">osmangund®</a>
+    </footer>
+</main>
+
+    <script>
+        const topInputs = document.querySelector(".inputs-top");
+        const inputs = document.querySelectorAll("input");
+        const imgs = document.querySelectorAll("img");
+        const labels = topInputs.querySelectorAll("label");
+        let inputCount = 0;
+
+        function handleUpdate() {
+            const suffix = this.dataset.type || "";
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+        }
+
+      document.getElementById("new-var-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default submit & refresh behavior
+
+            const styleName = document.getElementById("new-style").value;
+            const newSuffix = document.getElementById("new-style-suffix").value || "";
+
+            // Label creation
+            const newInputLabel = document.createElement("label");
+            newInputLabel.setAttribute("for", `newInput${inputCount}`);
+            newInputLabel.appendChild(document.createTextNode(`${styleName}:`));
+
+            // Input creation
+            const newInput = document.createElement("input");
+            newInput.name = `newInput${inputCount}`;
+            newInput.id = `newInput${inputCount}`;
+            newInput.value = "0";
+
+            switch (styleName) {
+                case "color":
+                case "background-color":
+                case "background":
+                    newInput.type = "color";
+                    break;
+                default:
+                    newInput.type = "range";
+            }
+            
+            newInput.dataset.type = newSuffix;
+
+            // Append input & label to DOM 
+            topInputs.appendChild(newInputLabel);
+            topInputs.appendChild(newInput);
+            
+            // Change CSS style
+            imgs.forEach(img => {
+                img.style[styleName] = newInput.value + newSuffix;
+            });
+
+            // Update value
+            newInput.addEventListener('input', function () {
+                imgs.forEach(img => {
+                    img.style[styleName] = newInput.value + newSuffix;
+                });
+            });
+            addDeleteFunctionality(newInputLabel);
+            inputCount++;
+        });
+
+
+        // Delete button creation
+        function addDeleteFunctionality(label) {
+                let span = document.createElement("span");
+                span.appendChild(document.createTextNode("X"));
+                label.append(span);
+                span.addEventListener("click", function () {
+                    const inputId = label.getAttribute("for");
+                    const inputElement = document.getElementById(inputId);
+                    if (inputElement) {
+                        inputElement.remove();
+                    }
+                    label.remove();
+                });
+            }
+
+        labels.forEach(addDeleteFunctionality); 
+
+        // Update value on change or hard change
+        inputs.forEach(input => input.addEventListener('change', handleUpdate));
+        inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+        </script>
+        
+</body>
+</html>

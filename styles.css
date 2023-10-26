@@ -1,0 +1,88 @@
+:root {
+    --gold-color: #BFA181;
+    --turquoise-color: #178582;
+    --blue-color: #0A1828;
+    --blur: 0px;
+    --zoom: 1;
+    --color-deg: 0deg;
+    --color: #0A1828;
+}
+* {
+    box-sizing: border-box;
+    color: whitesmoke;
+}
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--blue-color);
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 1.5rem;
+    padding: 1rem;
+    color: whitesmoke;
+}
+label span {
+    padding: 0 2px;
+}
+label span:hover {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.inputs-wrapper {
+    width: 55%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+h1 {
+    /* color: var(--base); */
+    color: var(--turquoise-color);
+    text-align: center;
+}
+.hl {
+    color: var(--gold-color);
+}
+.img-wrapper {
+    margin: 2rem;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    transition: all .2s ease;
+}
+img {
+    width: 50%;
+    height: 50%;
+    transform: scale(var(--zoom));
+    filter: blur(var(--blur)) hue-rotate(var(--color-deg));
+}
+
+#new-var-form input {
+    color: black;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    margin: 1rem;
+    font-size: .625rem;
+}
+
+footer a {
+    text-decoration: none;
+    transition: all .5s;
+}
+
+footer a:hover {
+    cursor: pointer;
+    color: var(--gold-color);
+    border: 2px solid transparent;
+}

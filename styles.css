@@ -67,13 +67,16 @@ h1 {
 }
 
 img {
+    width: 80vw;
     transform: scale(var(--zoom));
     filter: blur(var(--blur)) hue-rotate(var(--color-deg));
     transition: .3s;
     z-index: -1;
     flex: 1;
 }
-
+.inputs-bottom input {
+    color: black;
+}
 .submit {
     color: black;
 }
